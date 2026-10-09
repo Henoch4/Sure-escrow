@@ -66,6 +66,14 @@ select#netSel{background:var(--panel);border:1px solid var(--line2);border-radiu
 footer{padding:36px 0;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
 .proof{background:var(--panel);border:1px solid var(--line2);border-radius:12px;padding:18px 20px;display:grid;grid-template-columns:auto 1fr;gap:8px 18px}
 .proof a{color:var(--accent)}
+
+.proof{display:block;max-width:440px;margin-top:18px;padding:16px 18px;background:var(--panel);border:1px solid var(--line2);border-radius:8px}
+.proof-title{font-family:ui-monospace,'Courier New',monospace;font-size:11px;font-weight:600;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+.proof-grid{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-family:ui-monospace,'Courier New',monospace;font-size:12px;color:var(--muted)}
+.proof-grid .val{color:var(--accent);overflow-wrap:anywhere}
+.proof-links{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px}
+.proof-link{font-family:ui-monospace,'Courier New',monospace;font-size:11px;color:var(--accent);border-bottom:1px solid var(--accent);text-decoration:none}
+.proof-link:hover{opacity:.85}
 </style>
 </head>
 <body>
@@ -136,12 +144,21 @@ footer{padding:36px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 </div>
 </div>
 
-<footer>
+<footer><div class="wrap">
+<p style="margin-bottom:2px">SureEscrow — milestone escrow on BOT Chain. Testnet deployment; test tokens have no monetary value.</p>
 <div class="proof">
-<span>Contract</span><b class="mono" style="color:var(--accent);overflow-wrap:anywhere">0xDf9229a3242a84cAa2cdB4AEC4e1475AFf6AB080</b>
-<span>Explorer</span><b><a class="mono" style="color:var(--accent)" href="https://scan.bohr.life/address/0xDf9229a3242a84cAa2cdB4AEC4e1475AFf6AB080" target="_blank" rel="noopener">scan.bohr.life ✓ verified</a></b>
+<div class="proof-title">Proof on BOT Chain Testnet</div>
+<div class="proof-grid">
+<span>Chain ID</span><span class="val">968</span>
+<span>SureEscrow</span><span class="val">0xDf9229a3242a84cAa2cdB4AEC4e1475AFf6AB080</span>
+<span>Escrow token</span><span class="val">TestWBOT 0xD8FBaBf44B2dbb427d881F8Ea66F14D8287A55c0</span>
 </div>
-</footer>
+<div class="proof-links">
+<a href="https://botchain.ai" target="_blank" rel="noopener" class="proof-link">BOT Chain Website &#8599;</a>
+<a href="https://scan.bohr.life/address/0xDf9229a3242a84cAa2cdB4AEC4e1475AFf6AB080" target="_blank" rel="noopener" class="proof-link">View contract on Explorer &#8599;</a>
+</div>
+</div>
+</div></footer>
 
 <script type="importmap">
 {"imports":{"ethers":"https://esm.sh/ethers@6.13.2","@reown/appkit":"https://esm.sh/@reown/appkit@1.8.21","@reown/appkit-adapter-ethers":"https://esm.sh/@reown/appkit-adapter-ethers@1.8.21"}}

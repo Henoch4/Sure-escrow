@@ -56,6 +56,14 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--muted);font-s
 .proof b{color:var(--accent);font-weight:600;overflow-wrap:anywhere}
 .proof a{color:var(--accent)}
 @media(max-width:860px){.hero h1{font-size:38px}.stats{grid-template-columns:repeat(2,1fr)}.grid3,.steps{grid-template-columns:1fr}.stat:nth-child(2){border-right:none}}
+
+.proof{display:block;max-width:440px;margin-top:18px;padding:16px 18px;background:var(--panel);border:1px solid var(--line2);border-radius:8px}
+.proof-title{font-family:ui-monospace,'Courier New',monospace;font-size:11px;font-weight:600;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+.proof-grid{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-family:ui-monospace,'Courier New',monospace;font-size:12px;color:var(--muted)}
+.proof-grid .val{color:var(--accent);overflow-wrap:anywhere}
+.proof-links{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px}
+.proof-link{font-family:ui-monospace,'Courier New',monospace;font-size:11px;color:var(--accent);border-bottom:1px solid var(--accent);text-decoration:none}
+.proof-link:hover{opacity:.85}
 </style>
 </head>
 <body>
@@ -108,12 +116,18 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--muted);font-s
 </section>
 
 <footer><div class="wrap">
-SureEscrow — milestone escrow on BOT Chain. Testnet deployment; TestWBOT has no value.
+<p style="margin-bottom:2px">SureEscrow — milestone escrow on BOT Chain. Testnet deployment; test tokens have no monetary value.</p>
 <div class="proof">
-<span>Chain</span><b>BOT Chain Testnet · 968</b>
-<span>SureEscrow</span><b>0xDf9229a3242a84cAa2cdB4AEC4e1475AFf6AB080</b>
-<span>Escrow token</span><b>TestWBOT · 0xD8FBaBf44B2dbb427d881F8Ea66F14D8287A55c0</b>
-<span>Verified</span><b><a href="https://scan.bohr.life/address/0xDf9229a3242a84cAa2cdB4AEC4e1475AFf6AB080" target="_blank" rel="noopener">scan.bohr.life ✓</a></b>
+<div class="proof-title">Proof on BOT Chain Testnet</div>
+<div class="proof-grid">
+<span>Chain ID</span><span class="val">968</span>
+<span>SureEscrow</span><span class="val">0xDf9229a3242a84cAa2cdB4AEC4e1475AFf6AB080</span>
+<span>Escrow token</span><span class="val">TestWBOT 0xD8FBaBf44B2dbb427d881F8Ea66F14D8287A55c0</span>
+</div>
+<div class="proof-links">
+<a href="https://botchain.ai" target="_blank" rel="noopener" class="proof-link">BOT Chain Website &#8599;</a>
+<a href="https://scan.bohr.life/address/0xDf9229a3242a84cAa2cdB4AEC4e1475AFf6AB080" target="_blank" rel="noopener" class="proof-link">View contract on Explorer &#8599;</a>
+</div>
 </div>
 </div></footer>
 
