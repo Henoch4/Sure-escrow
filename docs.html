@@ -113,15 +113,15 @@ resolveDispute(id,payFreelancer)  arbiter only → splits remaining funds</pre>
 
 <section id="demo">
 <h2>Demo activity</h2>
-<p>Deal #0: Wallet A (client) ↔ Wallet B (freelancer), 4 milestones × 10 TWBOT. Six testnet demo transactions, all status ok:</p>
+<p>Deal #0: Wallet A (client) ↔ Wallet B (freelancer), 4 milestones × 0.01 WBOT. Six mainnet demo transactions, all status ok:</p>
 <table>
-<tr><th>#</th><th>Method</th><th>Actor</th><th>Description</th></tr>
-<tr><td>1</td><td class="mono">createDeal</td><td>A</td><td>40 TWBOT pulled into escrow</td></tr>
-<tr><td>2</td><td class="mono">release</td><td>A</td><td>m0 → freelancer (10)</td></tr>
-<tr><td>3</td><td class="mono">release</td><td>A</td><td>m1 → freelancer (10)</td></tr>
-<tr><td>4</td><td class="mono">release</td><td>A</td><td>m2 → freelancer (10)</td></tr>
-<tr><td>5</td><td class="mono">dispute</td><td>B</td><td>Freelancer disputes over final milestone</td></tr>
-<tr><td>6</td><td class="mono">resolveDispute</td><td>deployer (arbiter)</td><td>Resolves → freelancer: final 10 TWBOT</td></tr>
+<tr><th>#</th><th>Method</th><th>Actor</th><th>Description</th><th>Tx</th></tr>
+<tr><td>1</td><td class="mono">createDeal</td><td>A</td><td>0.04 WBOT pulled into escrow</td><td class="mono"><a href="https://scan.botchain.ai/tx/0x0ce95b2a7d280381c2068bc4e812ed92f93500e7f38fd8cfa1c7fa7ba9ef527d" target="_blank" rel="noopener">0x0ce95b2a…527d</a></td></tr>
+<tr><td>2</td><td class="mono">release</td><td>A</td><td>m0 → freelancer (0.01)</td><td class="mono"><a href="https://scan.botchain.ai/tx/0x6f4cec84a407d96959382f14ba3ca0b5a63eefda148f8c69e00211fa7df3ad72" target="_blank" rel="noopener">0x6f4cec84…ad72</a></td></tr>
+<tr><td>3</td><td class="mono">release</td><td>A</td><td>m1 → freelancer (0.01)</td><td class="mono"><a href="https://scan.botchain.ai/tx/0x98d08e73b134c896d44fc26d4fed17bb8cbc576ac0cbd3875eadbae42826123f" target="_blank" rel="noopener">0x98d08e73…123f</a></td></tr>
+<tr><td>4</td><td class="mono">release</td><td>A</td><td>m2 → freelancer (0.01)</td><td class="mono"><a href="https://scan.botchain.ai/tx/0xcce7183252b50a6546128abe0a994da85bca08527ab3797e29e0b21500c1ee59" target="_blank" rel="noopener">0xcce71832…ee59</a></td></tr>
+<tr><td>5</td><td class="mono">dispute</td><td>B</td><td>Freelancer disputes over final milestone</td><td class="mono"><a href="https://scan.botchain.ai/tx/0xae72ba96fe01e0e2fd8a745dd66d147818b098c6f57b415249df7877c406af87" target="_blank" rel="noopener">0xae72ba96…af87</a></td></tr>
+<tr><td>6</td><td class="mono">resolveDispute</td><td>deployer (arbiter)</td><td>Resolves → freelancer: final 0.01 WBOT</td><td class="mono"><a href="https://scan.botchain.ai/tx/0x3b4bdae7ce8a274ddef9878133fbc6e1674b307b867f0ae0c467ff89255440a9" target="_blank" rel="noopener">0x3b4bdae7…40a9</a></td></tr>
 </table>
 </section>
 
