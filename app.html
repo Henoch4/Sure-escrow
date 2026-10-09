@@ -83,7 +83,7 @@ footer{padding:36px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 <a href="index.html">Home</a>
 <a href="app.html" class="on">App</a>
 <a href="docs.html">Docs</a>
-<select id="netSel"><option value="968" selected>Testnet 968</option><option value="677">Mainnet 677</option></select>
+<select id="netSel"><option value="968">Testnet 968</option><option value="677" selected>Mainnet 677</option></select>
 <button class="btn btn-a" id="connectBtn">Connect wallet</button>
 </div>
 </div></nav>
@@ -91,13 +91,13 @@ footer{padding:36px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 <div class="ticker">
 <div class="cell"><span class="k">Deals created</span><span class="v" id="tDeals">—</span></div>
 <div class="cell"><span class="k">Total released</span><span class="v" id="tReleased">—</span></div>
-<div class="cell"><span class="k">Your TestWBOT</span><span class="v" id="tBal">—</span></div>
+<div class="cell"><span class="k">Your WBOT</span><span class="v" id="tBal">—</span></div>
 </div>
 
 <div class="wrap">
 <div class="page-head">
 <h1>Escrow deals</h1>
-<span class="badge">Milestones · chain 968</span>
+<span class="badge">Milestones · chain 677</span>
 </div>
 
 <div class="main-grid">
@@ -110,7 +110,7 @@ footer{padding:36px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 <div class="panel">
 <div class="panel-head"><h3>Create deal</h3><div class="dot"></div></div>
 <div class="row"><label>Freelancer</label><input id="dFree" placeholder="0x…" spellcheck="false"><span></span></div>
-<div class="row"><label>Milestones</label><input id="dAmts" placeholder="10,10,10,10 (TWBOT each)"><span></span></div>
+<div class="row"><label>Milestones</label><input id="dAmts" placeholder="10,10,10,10 (WBOT each)"><span></span></div>
 <div class="row" style="border-bottom:none"><span></span><span class="hint" style="padding:0">Comma-separated amounts; total pulled into escrow now.</span><button class="btn btn-a" id="dBtn">Create →</button></div>
 <div class="msg" id="dMsg" style="display:none"></div>
 </div>
@@ -145,16 +145,16 @@ footer{padding:36px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 </div>
 
 <footer><div class="wrap">
-<p style="margin-bottom:2px">SureEscrow — milestone escrow on BOT Chain. Testnet deployment; test tokens have no monetary value.</p>
+<p style="margin-bottom:2px">SureEscrow — milestone escrow on BOT Chain. Live on mainnet; real assets with real value.</p>
 <div class="proof">
-<div class="proof-title">Proof on BOT Testnet</div>
+<div class="proof-title">Proof on BOT Mainnet</div>
 <div class="proof-grid">
-<span>Chain ID</span><span class="val">968</span>
-<span>Contract</span><span class="val">0xDf9229a3242a84cAa2cdB4AEC4e1475AFf6AB080</span>
+<span>Chain ID</span><span class="val">677</span>
+<span>Contract</span><span class="val">0xa6e6a6C84705D12b7CDc268c2fECB89612122A48</span>
 </div>
 <div class="proof-links">
 <a href="https://botchain.ai" target="_blank" rel="noopener" class="proof-link">BOT Chain Website &#8599;</a>
-<a href="https://scan.bohr.life/address/0xDf9229a3242a84cAa2cdB4AEC4e1475AFf6AB080" target="_blank" rel="noopener" class="proof-link">BOTScan Explorer &#8599;</a>
+<a href="https://scan.botchain.ai/" target="_blank" rel="noopener" class="proof-link">BOTScan Explorer &#8599;</a>
 </div>
 </div>
 </div></footer>

@@ -63,7 +63,7 @@ footer{padding:36px 0 56px;color:var(--muted);font-size:13px}
 <div class="wrap">
 <div class="docs-head">
 <h1>SureEscrow Docs</h1>
-<p>Milestone escrow between one client and one freelancer on BOT Chain testnet, with an arbiter for disputes.</p>
+<p>Milestone escrow between one client and one freelancer on BOT Chain mainnet, with an arbiter for disputes.</p>
 <div class="toc">
 <a href="#deploy">Deployment</a><a href="#model">Model</a><a href="#abi">Contract API</a><a href="#demo">Demo activity</a><a href="#build">Build &amp; verify</a>
 </div>
@@ -72,9 +72,9 @@ footer{padding:36px 0 56px;color:var(--muted);font-size:13px}
 <section id="deploy">
 <h2>Deployment</h2>
 <div class="addr-box">
-<div class="k">Chain</div><div class="v">BOT Chain Testnet · chainId 968 · RPC https://rpc.bohr.life · explorer https://scan.bohr.life</div>
-<div class="k">SureEscrow</div><div class="v"><a href="https://scan.bohr.life/address/0xDf9229a3242a84cAa2cdB4AEC4e1475AFf6AB080" target="_blank" rel="noopener">0xDf9229a3242a84cAa2cdB4AEC4e1475AFf6AB080</a> · verified ✓</div>
-<div class="k">Escrow token</div><div class="v">TestWBOT <a href="https://scan.bohr.life/address/0xD8FBaBf44B2dbb427d881F8Ea66F14D8287A55c0" target="_blank" rel="noopener">0xD8FBaBf44B2dbb427d881F8Ea66F14D8287A55c0</a></div>
+<div class="k">Chain</div><div class="v">BOT Chain Mainnet · chainId 677 · RPC https://rpc.botchain.ai · explorer https://scan.botchain.ai</div>
+<div class="k">SureEscrow</div><div class="v"><a href="https://scan.botchain.ai/address/0xa6e6a6C84705D12b7CDc268c2fECB89612122A48" target="_blank" rel="noopener">0xa6e6a6C84705D12b7CDc268c2fECB89612122A48</a> · verified ✓</div>
+<div class="k">Escrow token</div><div class="v">WBOT <a href="https://scan.botchain.ai/address/0xD5452816194a3784dBa983426cCe7c122F4abd30" target="_blank" rel="noopener">0xD5452816194a3784dBa983426cCe7c122F4abd30</a></div>
 <div class="k">Arbiter</div><div class="v">contract owner() = deployer (resolveDispute, arbiter only)</div>
 <div class="k">Compiler</div><div class="v">solc 0.8.30+commit.73712a01 · optimizer 200 · evmVersion cancun · flattened-code verification</div>
 </div>
@@ -113,7 +113,7 @@ resolveDispute(id,payFreelancer)  arbiter only → splits remaining funds</pre>
 
 <section id="demo">
 <h2>Demo activity</h2>
-<p>Deal #0: Wallet A (client) ↔ Wallet B (freelancer), 4 milestones × 10 TWBOT. Six demo transactions, all status ok:</p>
+<p>Deal #0: Wallet A (client) ↔ Wallet B (freelancer), 4 milestones × 10 TWBOT. Six testnet demo transactions, all status ok:</p>
 <table>
 <tr><th>#</th><th>Method</th><th>Actor</th><th>Description</th></tr>
 <tr><td>1</td><td class="mono">createDeal</td><td>A</td><td>40 TWBOT pulled into escrow</td></tr>
@@ -129,23 +129,23 @@ resolveDispute(id,payFreelancer)  arbiter only → splits remaining funds</pre>
 <h2>Build &amp; verify</h2>
 <pre>cd botchain-builds/agent-vault
 node build5.mjs                       # compile → artifacts/sureescrow/
-node deploy-5-testnet.mjs             # deploy → deployed-testnet-5.json
-node demo-txs-5-testnet.mjs           # 6 demo txs
+node deploy-5-mainnet.mjs             # deploy → deployed-mainnet-5.json
+node demo-5-mainnet.mjs           # 6 demo txs
 node make-flat-5.mjs                  # flatten + byte-match
-node submit-verify-5.mjs SureEscrow   # verify on scan.bohr.life</pre>
+node submit-verify-5-mainnet.mjs SureEscrow   # verify on scan.botchain.ai</pre>
 </section>
 
 <footer><div class="wrap">
-<p style="margin-bottom:2px">SureEscrow — milestone escrow on BOT Chain. Testnet deployment; test tokens have no monetary value.</p>
+<p style="margin-bottom:2px">SureEscrow — milestone escrow on BOT Chain. Live on mainnet; real assets with real value.</p>
 <div class="proof">
-<div class="proof-title">Proof on BOT Testnet</div>
+<div class="proof-title">Proof on BOT Mainnet</div>
 <div class="proof-grid">
-<span>Chain ID</span><span class="val">968</span>
-<span>Contract</span><span class="val">0xDf9229a3242a84cAa2cdB4AEC4e1475AFf6AB080</span>
+<span>Chain ID</span><span class="val">677</span>
+<span>Contract</span><span class="val">0xa6e6a6C84705D12b7CDc268c2fECB89612122A48</span>
 </div>
 <div class="proof-links">
 <a href="https://botchain.ai" target="_blank" rel="noopener" class="proof-link">BOT Chain Website &#8599;</a>
-<a href="https://scan.bohr.life/address/0xDf9229a3242a84cAa2cdB4AEC4e1475AFf6AB080" target="_blank" rel="noopener" class="proof-link">BOTScan Explorer &#8599;</a>
+<a href="https://scan.botchain.ai/" target="_blank" rel="noopener" class="proof-link">BOTScan Explorer &#8599;</a>
 </div>
 </div>
 </div></footer>

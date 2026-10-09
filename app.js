@@ -42,6 +42,10 @@ const CONTRACTS = {
     se: '0xDf9229a3242a84cAa2cdB4AEC4e1475AFf6AB080',
     twbot: '0xD8FBaBf44B2dbb427d881F8Ea66F14D8287A55c0',
   },
+  677: {
+    se: '0xa6e6a6C84705D12b7CDc268c2fECB89612122A48',
+    twbot: '0xD5452816194a3784dBa983426cCe7c122F4abd30',
+  },
 };
 
 const $ = (id) => document.getElementById(id);
@@ -50,7 +54,7 @@ const short = (a) => a.slice(0, 6) + '…' + a.slice(-4);
 
 let appkit = null;
 let readProvider;
-let currentChainId = 968;
+let currentChainId = 677;
 let account = null;
 
 function initAppKit() {
@@ -128,7 +132,7 @@ async function refresh() {
       }).join('');
       const youAre = account && (account.toLowerCase() === d.client.toLowerCase() || account.toLowerCase() === d.freelancer.toLowerCase());
       return `<div class="deal">
-        <div class="d-top"><b>Deal #${d.id} · ${fmt(d.funded)} TWBOT</b><span class="tag ${tagCls}">${tagTxt}</span></div>
+        <div class="d-top"><b>Deal #${d.id} · ${fmt(d.funded)} WBOT</b><span class="tag ${tagCls}">${tagTxt}</span></div>
         <div class="d-meta">
           <span>client <b class="mono">${short(d.client)}</b></span>
           <span>freelancer <b class="mono">${short(d.freelancer)}</b></span>
@@ -147,7 +151,7 @@ async function refresh() {
 
 async function signerOrAlert() {
   if (!account) { appkit?.open(); return null; }
-  if (currentChainId !== 968) { alert('Demo contracts are deployed on Testnet 968. Switch network in your wallet.'); return null; }
+  if (!CONTRACTS[currentChainId]) { alert('No contracts on this network in this app. Switch to BOT Chain 677 or Testnet 968.'); return null; }
   const s = await appkit?.getSigner();
   if (!s) { appkit?.open(); return null; }
   return s;
@@ -168,7 +172,7 @@ async function doCreate() {
   const total = bigs.reduce((x, y) => x + y, 0n);
   const token = new ethers.Contract(c.twbot, ERC20_ABI, s);
   const owner = await s.getAddress();
-  showMsg('dMsg', 'Approving ' + fmt(total) + ' TWBOT…');
+  showMsg('dMsg', 'Approving ' + fmt(total) + ' WBOT…');
   try {
     const allow = await token.allowance(owner, c.se);
     if (allow < total) { const tx = await token.approve(c.se, total); await tx.wait(); }
@@ -176,7 +180,7 @@ async function doCreate() {
     showMsg('dMsg', 'Sending createDeal…');
     const tx = await se.createDeal(freelancer, bigs);
     await tx.wait();
-    showMsg('dMsg', 'Deal created ✓ (' + amts.length + ' milestones, ' + fmt(total) + ' TWBOT escrowed)');
+    showMsg('dMsg', 'Deal created ✓ (' + amts.length + ' milestones, ' + fmt(total) + ' WBOT escrowed)');
     refresh();
   } catch (e) { showMsg('dMsg', 'Failed: ' + (e.shortMessage || e.message || '').slice(0, 140)); }
 }
@@ -195,7 +199,7 @@ async function act(msgId, fn) {
 }
 
 function boot() {
-  readProvider = new ethers.JsonRpcProvider('https://rpc.bohr.life');
+  readProvider = new ethers.JsonRpcProvider(currentChainId === 677 ? 'https://rpc.botchain.ai' : 'https://rpc.bohr.life');
   initAppKit();
   $('dBtn')?.addEventListener('click', doCreate);
   $('aRelease')?.addEventListener('click', () => act('aMsg', async (se, id) => {
