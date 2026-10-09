@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SureEscrow — milestone escrow on BOT Chain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#101214;--panel:#171a1d;--panel2:#1f2327;--accent:#ffd60a;--accent2:#ffe44d;--danger:#ef4444;--text:#f0f2f4;--muted:#8b939b;--line:rgba(240,242,244,.09);--line2:rgba(240,242,244,.18)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Archivo',sans-serif;line-height:1.55;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.mono{font-family:'Courier New',monospace}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+nav{border-bottom:1px solid var(--line);background:rgba(16,18,20,.9);backdrop-filter:blur(8px);position:sticky;top:0;z-index:50}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px;letter-spacing:.01em}
+.logo i{width:16px;height:16px;background:var(--accent);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);box-shadow:0 0 14px rgba(255,214,10,.45)}
+.nav-links{display:flex;align-items:center;gap:22px;font-size:13.5px;color:var(--muted)}
+.nav-links a:hover,.nav-links a.on{color:var(--accent)}
+.btn{font-family:'Archivo',sans-serif;font-weight:700;font-size:13.5px;padding:10px 18px;border-radius:8px;border:none;cursor:pointer;transition:all .15s;min-height:40px}
+.btn-a{background:var(--accent);color:#171400}
+.btn-a:hover{background:var(--accent2)}
+.btn-g{background:transparent;color:var(--text);border:1px solid var(--line2)}
+.btn-g:hover{border-color:var(--accent)}
+select#netSel{background:var(--panel);border:1px solid var(--line2);border-radius:8px;font-family:inherit;font-size:12px;padding:9px;color:var(--text)}
+.hero{padding:88px 0 70px;text-align:center}
+.pill{display:inline-block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(255,214,10,.4);border-radius:99px;padding:7px 16px;margin-bottom:26px}
+.hero h1{font-size:56px;font-weight:800;letter-spacing:-.03em;line-height:1.08;max-width:840px;margin:0 auto 20px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{color:var(--muted);font-size:17px;max-width:610px;margin:0 auto 34px}
+.hero .cta{display:flex;gap:14px;justify-content:center}
+.btn-lg{padding:14px 28px;font-size:15px;border-radius:10px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stat{padding:26px 20px;text-align:center;border-right:1px solid var(--line)}
+.stat:last-child{border-right:none}
+.stat .v{font-size:26px;font-weight:800;color:var(--accent)}
+.stat .k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+section{padding:74px 0}
+.sec-t{font-size:30px;font-weight:800;letter-spacing:-.02em;margin-bottom:12px;text-align:center}
+.sec-s{color:var(--muted);text-align:center;max-width:560px;margin:0 auto 44px;font-size:15px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px 24px}
+.card .ic{font-size:26px;margin-bottom:14px}
+.card h3{font-size:17px;margin-bottom:8px}
+.card p{color:var(--muted);font-size:14px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.step{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:14px;padding:26px 24px}
+.step b{color:var(--accent);font-size:13px;letter-spacing:.1em}
+.step h4{margin:10px 0 8px;font-size:16px}
+.step p{color:var(--muted);font-size:14px}
+footer{border-top:1px solid var(--line);padding:44px 0;color:var(--muted);font-size:13.5px}
+.proof{background:var(--panel);border:1px solid var(--line2);border-radius:12px;padding:20px 22px;margin-top:18px;display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:13px}
+.proof b{color:var(--accent);font-weight:600;overflow-wrap:anywhere}
+.proof a{color:var(--accent)}
+@media(max-width:860px){.hero h1{font-size:38px}.stats{grid-template-columns:repeat(2,1fr)}.grid3,.steps{grid-template-columns:1fr}.stat:nth-child(2){border-right:none}}
+</style>
+</head>
+<body>
+<nav><div class="wrap nav-in">
+<div class="logo"><i></i>SureEscrow</div>
+<div class="nav-links">
+<a href="index.html" class="on">Home</a>
+<a href="app.html">App</a>
+<a href="docs.html">Docs</a>
+<select id="netSel"><option value="968" selected>Testnet 968</option><option value="677">Mainnet 677</option></select>
+<button class="btn btn-a" id="connectBtn">Connect wallet</button>
+</div>
+</div></nav>
+
+<div class="hero wrap">
+<div class="pill">Milestone escrow · BOT Chain 968</div>
+<h1>Fund the work. Release <em>milestone by milestone</em>.</h1>
+<p>SureEscrow holds a freelancer's pay in the contract until the client releases each milestone. Disputes go to an arbiter — nobody can take the funds mid-job.</p>
+<div class="cta">
+<a class="btn btn-a btn-lg" href="app.html">Launch app →</a>
+<a class="btn btn-g btn-lg" href="docs.html">Read the docs</a>
+</div>
+</div>
+
+<div class="stats">
+<div class="stat"><div class="v" id="stDeals">—</div><div class="k">Deals created</div></div>
+<div class="stat"><div class="v" id="stReleased">—</div><div class="k">TWBOT released</div></div>
+<div class="stat"><div class="v">1-1</div><div class="k">Client ↔ freelancer</div></div>
+<div class="stat"><div class="v">Owner</div><div class="k">Arbiter role</div></div>
+</div>
+
+<section class="wrap">
+<h2 class="sec-t">Why SureEscrow</h2>
+<p class="sec-s">Freelance trust problem, solved by custody — not reputation.</p>
+<div class="grid3">
+<div class="card"><div class="ic">🔐</div><h3>Funds locked in code</h3><p>The client transfers the full amount into the contract at deal creation. Neither party can withdraw it outside the milestone rules.</p></div>
+<div class="card"><div class="ic">🎚️</div><h3>Granular release</h3><p>Each milestone is a separate amount. Ship phase 1, release phase 1 — the rest stays locked until you say otherwise.</p></div>
+<div class="card"><div class="ic">⚖️</div><h3>Escalation path</h3><p>Either party can open a dispute; the contract's arbiter decides the split and the contract executes it in the same transaction.</p></div>
+</div>
+</section>
+
+<section class="wrap" style="padding-top:0">
+<h2 class="sec-t">How it works</h2>
+<p class="sec-s">Create, deliver, release — with a dispute button if things go sideways.</p>
+<div class="steps">
+<div class="step"><b>01</b><h4>Create a deal</h4><p>Client lists the freelancer and the milestone amounts; the full total is pulled into escrow immediately.</p></div>
+<div class="step"><b>02</b><h4>Release on delivery</h4><p>After each accepted milestone, the client calls <code>release(dealId, idx)</code> — that slice goes straight to the freelancer.</p></div>
+<div class="step"><b>03</b><h4>Dispute if needed</h4><p>Either party calls <code>dispute</code>; the arbiter resolves with a payout split, or the client cancels unstarted deals for a full refund.</p></div>
+</div>
+</section>
+
+<footer><div class="wrap">
+SureEscrow — milestone escrow on BOT Chain. Testnet deployment; TestWBOT has no value.
+<div class="proof">
+<span>Chain</span><b>BOT Chain Testnet · 968</b>
+<span>SureEscrow</span><b>0xDf9229a3242a84cAa2cdB4AEC4e1475AFf6AB080</b>
+<span>Escrow token</span><b>TestWBOT · 0xD8FBaBf44B2dbb427d881F8Ea66F14D8287A55c0</b>
+<span>Verified</span><b><a href="https://scan.bohr.life/address/0xDf9229a3242a84cAa2cdB4AEC4e1475AFf6AB080" target="_blank" rel="noopener">scan.bohr.life ✓</a></b>
+</div>
+</div></footer>
+
+<script type="importmap">
+{"imports":{"ethers":"https://esm.sh/ethers@6.13.2","@reown/appkit":"https://esm.sh/@reown/appkit@1.8.21","@reown/appkit-adapter-ethers":"https://esm.sh/@reown/appkit-adapter-ethers@1.8.21"}}
+</script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

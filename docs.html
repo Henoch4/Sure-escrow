@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SureEscrow — Docs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#101214;--panel:#171a1d;--panel2:#1f2327;--accent:#ffd60a;--text:#f0f2f4;--muted:#8b939b;--line:rgba(240,242,244,.09);--line2:rgba(240,242,244,.18)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Archivo',sans-serif;line-height:1.6;min-height:100vh}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.mono{font-family:'Courier New',monospace}
+.wrap{max-width:880px;margin:0 auto;padding:0 24px}
+nav{border-bottom:1px solid var(--line);background:rgba(16,18,20,.9);backdrop-filter:blur(8px);position:sticky;top:0;z-index:50}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px}
+.logo i{width:16px;height:16px;background:var(--accent);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+.nav-links{display:flex;gap:22px;font-size:13.5px;color:var(--muted);align-items:center}
+.nav-links a:hover,.nav-links a.on{color:var(--accent)}
+.docs-head{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.docs-head h1{font-size:33px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+.docs-head p{color:var(--muted);font-size:15px}
+.toc{display:flex;gap:18px;flex-wrap:wrap;margin-top:20px;font-size:13px}
+section{padding:36px 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:none}
+h2{font-size:21px;font-weight:700;margin-bottom:14px}
+h3{font-size:15px;font-weight:700;margin:22px 0 8px;color:var(--accent)}
+p{color:var(--muted);margin-bottom:12px;font-size:14.5px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{color:var(--muted);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+td.mono{font-family:'Courier New',monospace}
+code{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padding:1.5px 6px;font-family:'Courier New',monospace;font-size:13px;color:var(--accent)}
+pre{background:var(--panel);border:1px solid var(--line2);border-radius:10px;padding:16px 18px;overflow-x:auto;font-family:'Courier New',monospace;font-size:13px;color:var(--text);margin:12px 0;line-height:1.5}
+.addr-box{background:var(--panel);border:1px solid var(--line2);border-radius:10px;padding:16px 18px;margin:14px 0;display:grid;grid-template-columns:130px 1fr;gap:10px;font-size:13.5px}
+.addr-box .k{color:var(--muted);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;padding-top:2px}
+.addr-box .v{overflow-wrap:anywhere;font-family:'Courier New',monospace}
+footer{padding:36px 0 56px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<nav><div class="nav-in">
+<div class="logo"><i></i>SureEscrow</div>
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="app.html">App</a>
+<a href="docs.html" class="on">Docs</a>
+</div>
+</div></nav>
+
+<div class="wrap">
+<div class="docs-head">
+<h1>SureEscrow Docs</h1>
+<p>Milestone escrow between one client and one freelancer on BOT Chain testnet, with an arbiter for disputes.</p>
+<div class="toc">
+<a href="#deploy">Deployment</a><a href="#model">Model</a><a href="#abi">Contract API</a><a href="#demo">Demo activity</a><a href="#build">Build &amp; verify</a>
+</div>
+</div>
+
+<section id="deploy">
+<h2>Deployment</h2>
+<div class="addr-box">
+<div class="k">Chain</div><div class="v">BOT Chain Testnet · chainId 968 · RPC https://rpc.bohr.life · explorer https://scan.bohr.life</div>
+<div class="k">SureEscrow</div><div class="v"><a href="https://scan.bohr.life/address/0xDf9229a3242a84cAa2cdB4AEC4e1475AFf6AB080" target="_blank" rel="noopener">0xDf9229a3242a84cAa2cdB4AEC4e1475AFf6AB080</a> · verified ✓</div>
+<div class="k">Escrow token</div><div class="v">TestWBOT <a href="https://scan.bohr.life/address/0xD8FBaBf44B2dbb427d881F8Ea66F14D8287A55c0" target="_blank" rel="noopener">0xD8FBaBf44B2dbb427d881F8Ea66F14D8287A55c0</a></div>
+<div class="k">Arbiter</div><div class="v">contract owner() = deployer (resolveDispute, arbiter only)</div>
+<div class="k">Compiler</div><div class="v">solc 0.8.30+commit.73712a01 · optimizer 200 · evmVersion cancun · flattened-code verification</div>
+</div>
+</section>
+
+<section id="model">
+<h2>Model</h2>
+<p>A deal is a fixed list of milestone amounts. <code>createDeal</code> pulls the <b>entire total</b> from the client into the contract; from then on money only moves along three paths:</p>
+<pre>release(id, i)      client only   →  milestone i's amount → freelancer
+cancel(id)          client only   →  full refund (only if nothing released)
+dispute(id)         either party  →  freezes deal
+resolveDispute(id,payFreelancer)  arbiter only → splits remaining funds</pre>
+<p>Once every milestone is released, the deal auto-settles (<code>active = false</code>). Milestones are individually tracked — partial progress never endangers the locked remainder.</p>
+</section>
+
+<section id="abi">
+<h2>Contract API</h2>
+<table>
+<tr><th>Function</th><th>Signature</th><th>Description</th></tr>
+<tr><td class="mono">createDeal</td><td class="mono">(address freelancer, uint256[] milestoneAmounts)</td><td>Pulls full total; requires ≠ self, &gt; 0 amounts</td></tr>
+<tr><td class="mono">release</td><td class="mono">(uint256 dealId, uint256 milestoneIdx)</td><td>Client pays out one milestone</td></tr>
+<tr><td class="mono">cancel</td><td class="mono">(uint256 dealId)</td><td>Client refunds full amount (pre-release only)</td></tr>
+<tr><td class="mono">dispute</td><td class="mono">(uint256 dealId)</td><td>Either party freezes the deal</td></tr>
+<tr><td class="mono">resolveDispute</td><td class="mono">(uint256 dealId, bool payFreelancer)</td><td>Arbiter splits remaining funds</td></tr>
+<tr><td class="mono">getDeal</td><td class="mono">(uint256) → (client, freelancer, funded, releasedTotal, milestoneCount, active, disputed, amounts[], released[])</td><td>Full state</td></tr>
+<tr><td class="mono">totalDeals / totalReleased</td><td class="mono">view</td><td>Contract-wide stats</td></tr>
+</table>
+<h3>Events</h3>
+<table>
+<tr><th>Event</th><th>Fields</th></tr>
+<tr><td class="mono">DealCreated</td><td class="mono">(uint256 indexed dealId, address indexed client, address indexed freelancer, uint256 total, uint256 milestoneCount)</td></tr>
+<tr><td class="mono">MilestoneReleased</td><td class="mono">(uint256 indexed dealId, uint256 indexed milestone, address indexed freelancer, uint256 amount)</td></tr>
+<tr><td class="mono">DealCancelled / DealDisputed / DisputeResolved</td><td class="mono">refund / by / split amounts</td></tr>
+</table>
+</section>
+
+<section id="demo">
+<h2>Demo activity</h2>
+<p>Deal #0: Wallet A (client) ↔ Wallet B (freelancer), 4 milestones × 10 TWBOT. Six demo transactions, all status ok:</p>
+<table>
+<tr><th>#</th><th>Method</th><th>Actor</th><th>Description</th></tr>
+<tr><td>1</td><td class="mono">createDeal</td><td>A</td><td>40 TWBOT pulled into escrow</td></tr>
+<tr><td>2</td><td class="mono">release</td><td>A</td><td>m0 → freelancer (10)</td></tr>
+<tr><td>3</td><td class="mono">release</td><td>A</td><td>m1 → freelancer (10)</td></tr>
+<tr><td>4</td><td class="mono">release</td><td>A</td><td>m2 → freelancer (10)</td></tr>
+<tr><td>5</td><td class="mono">dispute</td><td>B</td><td>Freelancer disputes over final milestone</td></tr>
+<tr><td>6</td><td class="mono">resolveDispute</td><td>deployer (arbiter)</td><td>Resolves → freelancer: final 10 TWBOT</td></tr>
+</table>
+</section>
+
+<section id="build">
+<h2>Build &amp; verify</h2>
+<pre>cd botchain-builds/agent-vault
+node build5.mjs                       # compile → artifacts/sureescrow/
+node deploy-5-testnet.mjs             # deploy → deployed-testnet-5.json
+node demo-txs-5-testnet.mjs           # 6 demo txs
+node make-flat-5.mjs                  # flatten + byte-match
+node submit-verify-5.mjs SureEscrow   # verify on scan.bohr.life</pre>
+</section>
+
+<footer>SureEscrow is a testnet deployment. TestWBOT has no monetary value.</footer>
+</div>
+
+<script type="importmap">
+{"imports":{"ethers":"https://esm.sh/ethers@6.13.2","@reown/appkit":"https://esm.sh/@reown/appkit@1.8.21","@reown/appkit-adapter-ethers":"https://esm.sh/@reown/appkit-adapter-ethers@1.8.21"}}
+</script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
