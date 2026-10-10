@@ -76,7 +76,7 @@ let account = null;
 function initAppKit() {
   if (!$('connectBtn')) return;
   appkit = new AppKit({
-    networks: [botTestnet, botMainnet],
+    networks: [botMainnet, botTestnet],
     adapters: [new EthersAdapter()],
     projectId: PROJECT_ID,
     themeMode: 'dark',
