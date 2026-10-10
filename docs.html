@@ -8,7 +8,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#101214;--panel:#171a1d;--panel2:#1f2327;--accent:#ffd60a;--text:#f0f2f4;--muted:#8b939b;--line:rgba(240,242,244,.09);--line2:rgba(240,242,244,.18)}
+:root{--bg:#f1ece0;--fg:#0b2e24;--mut:#4f6b60;--line:#d9d1bd;--card:#faf7ef;--acc:#0f6b4c;--acc2:#85661a;--onacc:#f1ece0}@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b2e24;--fg:#f1ece0;--mut:#8fb5a5;--line:#1f5444;--card:#123b2f;--acc:#7be0b0;--acc2:#c8a24a;--onacc:#0b2e24}}@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f1ece0;--fg:#0b2e24;--mut:#4f6b60;--line:#d9d1bd;--card:#faf7ef;--acc:#0f6b4c;--acc2:#85661a;--onacc:#f1ece0}}:root[data-theme="dark"]{--bg:#0b2e24;--fg:#f1ece0;--mut:#8fb5a5;--line:#1f5444;--card:#123b2f;--acc:#7be0b0;--acc2:#c8a24a;--onacc:#0b2e24}:root[data-theme="light"]{--bg:#f1ece0;--fg:#0b2e24;--mut:#4f6b60;--line:#d9d1bd;--card:#faf7ef;--acc:#0f6b4c;--acc2:#85661a;--onacc:#f1ece0}
+:root{--panel:var(--card);--panel2:var(--card);--text:var(--fg);--muted:var(--mut);--accent:var(--acc);--accent2:var(--acc2);--line2:var(--line);--hairline:var(--line);--hairline-strong:var(--line);--danger:#ef4444}
+body{font-family:'Inter',system-ui,sans-serif!important}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:'Archivo',sans-serif;line-height:1.6;min-height:100vh}
 a{color:var(--accent);text-decoration:none}
@@ -136,7 +138,7 @@ node submit-verify-5-mainnet.mjs SureEscrow   # verify on scan.botchain.ai</pre>
 </section>
 
 <footer><div class="wrap">
-<p style="margin-bottom:2px">SureEscrow — milestone escrow on BOT Chain. Live on mainnet; real assets with real value.</p>
+<p style="margin-bottom:2px">SureEscrow — milestone escrow on BOT Chain. Live on mainnet; real funds with real recourse.</p>
 <div class="proof">
 <div class="proof-title">Proof on BOT Mainnet</div>
 <div class="proof-grid">
@@ -148,6 +150,7 @@ node submit-verify-5-mainnet.mjs SureEscrow   # verify on scan.botchain.ai</pre>
 <a href="https://scan.botchain.ai/" target="_blank" rel="noopener" class="proof-link">BOTScan Explorer &#8599;</a>
 </div>
 </div>
+<p style="margin-top:14px"><a href="index.html">Home</a> · <a href="app.html">Open the app →</a> · <a href="docs.html">Docs</a></p>
 </div></footer>
 </div>
 
@@ -155,5 +158,12 @@ node submit-verify-5-mainnet.mjs SureEscrow   # verify on scan.botchain.ai</pre>
 {"imports":{"ethers":"https://esm.sh/ethers@6.13.2","@reown/appkit":"https://esm.sh/@reown/appkit@1.8.21","@reown/appkit-adapter-ethers":"https://esm.sh/@reown/appkit-adapter-ethers@1.8.21"}}
 </script>
 <script type="module" src="app.js"></script>
+<script>
+(function(){try{var s=localStorage.getItem('botchain-theme');if(s)document.documentElement.dataset.theme=s;}catch(e){}
+var b=document.createElement('button');b.id='themeBtn';b.title='Theme';b.textContent=document.documentElement.dataset.theme==='light'?'\u261E':'\u2600';
+b.style.cssText='border:1px solid var(--line2,var(--line));background:transparent;color:inherit;border-radius:99px;width:38px;height:38px;font-size:15px;cursor:pointer;margin-left:10px';
+b.onclick=function(){var n=document.documentElement.dataset.theme==='light'?'dark':'light';document.documentElement.dataset.theme=n;try{localStorage.setItem('botchain-theme',n)}catch(e){}b.textContent=n==='light'?'\u261E':'\u2600';};
+var nav=document.querySelector('nav');if(nav)nav.appendChild(b);})();
+</script>
 </body>
 </html>
