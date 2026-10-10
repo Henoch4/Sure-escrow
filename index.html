@@ -1,122 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SureEscrow — milestone escrow on BOT Chain</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#101214;--panel:#171a1d;--panel2:#1f2327;--accent:#ffd60a;--accent2:#ffe44d;--danger:#ef4444;--text:#f0f2f4;--muted:#8b939b;--line:rgba(240,242,244,.09);--line2:rgba(240,242,244,.18)}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:'Archivo',sans-serif;line-height:1.55;min-height:100vh}
-a{color:inherit;text-decoration:none}
-.mono{font-family:'Courier New',monospace}
-.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
-nav{border-bottom:1px solid var(--line);background:rgba(16,18,20,.9);backdrop-filter:blur(8px);position:sticky;top:0;z-index:50}
-.nav-in{display:flex;align-items:center;justify-content:space-between;height:60px}
-.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px;letter-spacing:.01em}
-.logo i{width:16px;height:16px;background:var(--accent);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);box-shadow:0 0 14px rgba(255,214,10,.45)}
-.nav-links{display:flex;align-items:center;gap:22px;font-size:13.5px;color:var(--muted)}
-.nav-links a:hover,.nav-links a.on{color:var(--accent)}
-.btn{font-family:'Archivo',sans-serif;font-weight:700;font-size:13.5px;padding:10px 18px;border-radius:8px;border:none;cursor:pointer;transition:all .15s;min-height:40px}
-.btn-a{background:var(--accent);color:#171400}
-.btn-a:hover{background:var(--accent2)}
-.btn-g{background:transparent;color:var(--text);border:1px solid var(--line2)}
-.btn-g:hover{border-color:var(--accent)}
-select#netSel{background:var(--panel);border:1px solid var(--line2);border-radius:8px;font-family:inherit;font-size:12px;padding:9px;color:var(--text)}
-.hero{padding:88px 0 70px;text-align:center}
-.pill{display:inline-block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(255,214,10,.4);border-radius:99px;padding:7px 16px;margin-bottom:26px}
-.hero h1{font-size:56px;font-weight:800;letter-spacing:-.03em;line-height:1.08;max-width:840px;margin:0 auto 20px}
-.hero h1 em{font-style:normal;color:var(--accent)}
-.hero p{color:var(--muted);font-size:17px;max-width:610px;margin:0 auto 34px}
-.hero .cta{display:flex;gap:14px;justify-content:center}
-.btn-lg{padding:14px 28px;font-size:15px;border-radius:10px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.stat{padding:26px 20px;text-align:center;border-right:1px solid var(--line)}
-.stat:last-child{border-right:none}
-.stat .v{font-size:26px;font-weight:800;color:var(--accent)}
-.stat .k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:6px}
-section{padding:74px 0}
-.sec-t{font-size:30px;font-weight:800;letter-spacing:-.02em;margin-bottom:12px;text-align:center}
-.sec-s{color:var(--muted);text-align:center;max-width:560px;margin:0 auto 44px;font-size:15px}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px 24px}
-.card .ic{font-size:26px;margin-bottom:14px}
-.card h3{font-size:17px;margin-bottom:8px}
-.card p{color:var(--muted);font-size:14px}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.step{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:14px;padding:26px 24px}
-.step b{color:var(--accent);font-size:13px;letter-spacing:.1em}
-.step h4{margin:10px 0 8px;font-size:16px}
-.step p{color:var(--muted);font-size:14px}
-footer{border-top:1px solid var(--line);padding:44px 0;color:var(--muted);font-size:13.5px}
-.proof{background:var(--panel);border:1px solid var(--line2);border-radius:12px;padding:20px 22px;margin-top:18px;display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:13px}
-.proof b{color:var(--accent);font-weight:600;overflow-wrap:anywhere}
-.proof a{color:var(--accent)}
-@media(max-width:860px){.hero h1{font-size:38px}.stats{grid-template-columns:repeat(2,1fr)}.grid3,.steps{grid-template-columns:1fr}.stat:nth-child(2){border-right:none}}
-
-.proof{display:block;max-width:440px;margin-top:18px;padding:16px 18px;background:var(--panel);border:1px solid var(--line2);border-radius:8px}
-.proof-title{font-family:ui-monospace,'Courier New',monospace;font-size:11px;font-weight:600;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
-.proof-grid{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-family:ui-monospace,'Courier New',monospace;font-size:12px;color:var(--muted)}
-.proof-grid .val{color:var(--accent);overflow-wrap:anywhere}
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>SureEscrow — Milestone escrow on BOT Chain</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><style>:root{--bg:#f1ece0;--fg:#0b2e24;--mut:#4f6b60;--line:#d9d1bd;--card:#faf7ef;--acc:#0f6b4c;--acc2:#85661a;--onacc:#f1ece0}@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b2e24;--fg:#f1ece0;--mut:#8fb5a5;--line:#1f5444;--card:#123b2f;--acc:#7be0b0;--acc2:#c8a24a;--onacc:#0b2e24}}@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f1ece0;--fg:#0b2e24;--mut:#4f6b60;--line:#d9d1bd;--card:#faf7ef;--acc:#0f6b4c;--acc2:#85661a;--onacc:#f1ece0}}:root[data-theme="dark"]{--bg:#0b2e24;--fg:#f1ece0;--mut:#8fb5a5;--line:#1f5444;--card:#123b2f;--acc:#7be0b0;--acc2:#c8a24a;--onacc:#0b2e24}:root[data-theme="light"]{--bg:#f1ece0;--fg:#0b2e24;--mut:#4f6b60;--line:#d9d1bd;--card:#faf7ef;--acc:#0f6b4c;--acc2:#85661a;--onacc:#f1ece0}*,*:before,*:after{box-sizing:border-box}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-behavior:smooth;scroll-padding-top:calc(90px + env(safe-area-inset-top,0px))}body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);overflow-x:hidden;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit;color:inherit}.rv{opacity:0;transform:translateY(40px);transition:1s cubic-bezier(.2,.9,.2,1)}.rv.in{opacity:1;transform:none}.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));translate:-50% 220%;background:var(--fg);color:var(--bg);padding:14px 24px;border-radius:99px;z-index:100;transition:translate .5s cubic-bezier(.2,.9,.2,1);font-size:14px;max-width:90vw;text-align:center}.toast.on{translate:-50% 0}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+:root{--serif:'Newsreader',Georgia,serif;--sans:'Inter',system-ui,sans-serif}
+nav{display:flex;justify-content:space-between;align-items:center;padding:calc(20px + env(safe-area-inset-top,0px)) clamp(16px,4vw,56px) 20px;max-width:1360px;margin:0 auto}
+.lg{font-family:var(--serif);font-weight:600;font-size:26px;display:flex;align-items:center;gap:10px}.lg i{width:22px;height:22px;border:2px solid var(--acc);border-radius:50%;display:block;position:relative}.lg i:after{content:"";position:absolute;inset:4px;background:var(--acc);border-radius:50%}
+.cw{all:unset;cursor:pointer;border:1px solid var(--fg);padding:10px 20px;border-radius:6px;font-size:14px;font-weight:500}.cw:hover{background:var(--fg);color:var(--bg)}
+.lay{display:grid;grid-template-columns:.9fr 1.1fr;gap:72px;max-width:1360px;margin:0 auto;padding:40px clamp(16px,4vw,56px) 0;align-items:start}
+.side{position:sticky;top:calc(24px + env(safe-area-inset-top,0px))}
+.side h1{font-family:var(--serif);font-weight:400;font-size:clamp(44px,5.6vw,84px);line-height:1;margin:0 0 22px}.side h1 em{color:var(--acc)}
+.side p{font-size:18px;line-height:1.6;color:var(--mut);max-width:460px}
+.sum{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:32px}.sum div{background:var(--card);padding:20px}.sum span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}.sum b{display:block;font-family:var(--serif);font-weight:400;font-size:40px;line-height:1.1}
+.doc{background:var(--card);border:1px solid var(--line);padding:44px;position:relative;box-shadow:0 20px 60px color-mix(in srgb,var(--fg) 10%,transparent)}
+.doc:before{content:"";position:absolute;left:14px;right:-10px;top:10px;bottom:-10px;background:var(--card);border:1px solid var(--line);z-index:-1}
+.doc h3{font-family:var(--serif);font-weight:600;font-size:30px;margin:0}.doc .no{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin:6px 0 20px}
+.seal{position:absolute;right:36px;top:30px;width:88px;height:88px;border-radius:50%;background:var(--acc2);display:flex;align-items:center;justify-content:center;color:var(--bg);font-family:var(--serif);font-weight:600;font-size:15px;letter-spacing:.12em;box-shadow:inset 0 0 0 5px color-mix(in srgb,var(--bg) 40%,transparent);rotate:-12deg}
+.pt{display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:13px;padding:16px 0;border-block:1px solid var(--line);margin-bottom:12px}.pt span{display:block;color:var(--mut);text-transform:uppercase;letter-spacing:.1em;font-size:11px}
+.ms{display:grid;grid-template-columns:34px 1fr auto;gap:18px;padding:22px 0;border-bottom:1px solid var(--line);align-items:center}
+.dot{width:34px;height:34px;border-radius:50%;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:15px;transition:.5s}.ms.rel .dot{background:var(--acc);border-color:var(--acc);color:var(--onacc)}.ms.dsp .dot{border-color:var(--acc2);color:var(--acc2)}
+.ms h4{margin:0 0 4px;font-family:var(--serif);font-weight:600;font-size:22px}.ms small{color:var(--mut);font-size:13px}
+.am{font-family:var(--serif);font-size:28px;text-align:right}
+.ac{display:flex;gap:8px;margin-top:10px}.ac button{all:unset;cursor:pointer;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:8px 14px;border:1px solid var(--fg);border-radius:4px}.ac .r{background:var(--acc);color:var(--onacc);border-color:var(--acc)}.ac button:hover{opacity:.8}
+.dp{display:none;margin-top:12px;padding:14px;background:var(--bg);border:1px dashed var(--acc2);font-size:13px}.dp.on{display:block}.dp input{width:100%}
+input[type=range]{accent-color:var(--acc2)}
+.cr{margin-top:32px;display:grid;grid-template-columns:repeat(3,1fr) auto;gap:12px;align-items:end}.cr label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}.cr input{all:unset;display:block;width:100%;border-bottom:1px solid var(--fg);padding:8px 0;font-size:18px}
+.go{all:unset;cursor:pointer;background:var(--fg);color:var(--bg);padding:12px 20px;border-radius:4px;font-size:13px;font-weight:500}.go:hover{background:var(--acc);color:var(--onacc)}
+.why{max-width:1360px;margin:96px auto 0;padding:0 clamp(16px,4vw,56px);display:grid;grid-template-columns:repeat(3,1fr);gap:48px}.why div{border-top:2px solid var(--acc);padding-top:24px}.why h4{font-family:var(--serif);font-weight:600;font-size:30px;margin:0 0 10px}.why p{margin:0;color:var(--mut);line-height:1.6}
+footer{max-width:1360px;margin:96px auto 0;padding:32px clamp(16px,4vw,56px);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:900px){.lay,.why{grid-template-columns:1fr}.side{position:static}.cr{grid-template-columns:1fr}.seal{display:none}}
+select#netSel{background:var(--card);border:1px solid var(--fg);border-radius:6px;padding:9px 12px;font-size:13px;color:var(--fg)}
+#themeBtn{all:unset;cursor:pointer;border:1px solid var(--fg);border-radius:6px;width:38px;height:38px;font-size:14px;text-align:center}
+.proof{margin-top:18px;padding:16px 18px;background:var(--card);border:1px solid var(--line);border-radius:6px;max-width:460px}
+.proof-title{font-size:11px;font-weight:600;color:var(--acc);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+.proof-grid{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-family:ui-monospace,monospace;font-size:12px;color:var(--mut)}
+.proof-grid .val{color:var(--acc);overflow-wrap:anywhere}
 .proof-links{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px}
-.proof-link{font-family:ui-monospace,'Courier New',monospace;font-size:11px;color:var(--accent);border-bottom:1px solid var(--accent);text-decoration:none}
-.proof-link:hover{opacity:.85}
-</style>
-</head>
-<body>
-<nav><div class="wrap nav-in">
-<div class="logo"><i></i>SureEscrow</div>
-<div class="nav-links">
-<a href="index.html" class="on">Home</a>
-<a href="app.html">App</a>
-<a href="docs.html">Docs</a>
-<select id="netSel"><option value="968">Testnet 968</option><option value="677" selected>Mainnet 677</option></select>
-<button class="btn btn-a" id="connectBtn">Connect wallet</button>
-</div>
-</div></nav>
-
-<div class="hero wrap">
-<div class="pill">Milestone escrow · BOT Chain 677</div>
-<h1>Fund the work. Release <em>milestone by milestone</em>.</h1>
-<p>SureEscrow holds a freelancer's pay in the contract until the client releases each milestone. Disputes go to an arbiter — nobody can take the funds mid-job.</p>
-<div class="cta">
-<a class="btn btn-a btn-lg" href="app.html">Launch app →</a>
-<a class="btn btn-g btn-lg" href="docs.html">Read the docs</a>
-</div>
-</div>
-
-<div class="stats">
-<div class="stat"><div class="v" id="stDeals">—</div><div class="k">Deals created</div></div>
-<div class="stat"><div class="v" id="stReleased">—</div><div class="k">WBOT released</div></div>
-<div class="stat"><div class="v">1-1</div><div class="k">Client ↔ freelancer</div></div>
-<div class="stat"><div class="v">Owner</div><div class="k">Arbiter role</div></div>
-</div>
-
-<section class="wrap">
-<h2 class="sec-t">Why SureEscrow</h2>
-<p class="sec-s">Freelance trust problem, solved by custody — not reputation.</p>
-<div class="grid3">
-<div class="card"><div class="ic">🔐</div><h3>Funds locked in code</h3><p>The client transfers the full amount into the contract at deal creation. Neither party can withdraw it outside the milestone rules.</p></div>
-<div class="card"><div class="ic">🎚️</div><h3>Pay as work ships</h3><p>Each milestone is a separate amount. Ship phase 1, release phase 1 — the rest stays locked until you say otherwise.</p></div>
-<div class="card"><div class="ic">⚖️</div><h3>Escalation path</h3><p>If you can’t agree, a neutral arbiter decides — and the payout happens automatically. No courts, no chasing.</p></div>
-</div>
-</section>
-
-<section class="wrap" style="padding-top:0">
-<h2 class="sec-t">How it works</h2>
-<p class="sec-s">Create, deliver, release — with a dispute button if things go sideways.</p>
-<div class="steps">
-<div class="step"><b>01</b><h4>Create a deal</h4><p>Client lists the freelancer and the milestone amounts; the full total is pulled into escrow immediately.</p></div>
-<div class="step"><b>02</b><h4>Release on delivery</h4><p>When a milestone ships and you’re happy, tap release — that slice goes straight to the freelancer.</p></div>
-<div class="step"><b>03</b><h4>Dispute if needed</h4><p>Either side can flag a dispute for the arbiter to settle — and a deal with no work started can be cancelled for a full refund.</p></div>
-</div>
-</section>
-
+.proof-link{font-size:11px;color:var(--acc);border-bottom:1px solid var(--acc);text-decoration:none}
+.wrap{max-width:1360px;margin:0 auto;padding:0 clamp(16px,4vw,56px)}
+</style></head><body>
+<nav><a class="lg" href="index.html"><i></i>SureEscrow</a><span style="display:flex;gap:18px;align-items:center"><a href="index.html">Home</a><a href="app.html">App</a><a href="docs.html">Docs</a><select id="netSel"><option value="968">Testnet 968</option><option value="677" selected>Mainnet 677</option></select><button class="cw" id="themeBtn" title="Theme">☀</button><button class="cw" id="connectBtn">Connect wallet</button></span></nav>
+<main class="lay"><div class="side rv"><h1>Fund the work. <em>Release milestone by milestone.</em></h1><p>Milestone escrow on BOT Chain. The client locks the full amount up front, the freelancer is paid slice by slice, and an arbiter settles any dispute.</p>
+<div class="sum"><div><span>Total escrowed</span><b id="a1">0</b></div><div><span>Released</span><b id="a2">0</b></div><div><span>Still locked</span><b id="a3">0</b></div><div><span>Settled by arbiter</span><b id="a4">0</b></div></div></div>
+<div><div class="doc rv"><div class="seal">SURE<br>ESCROW</div><h3>Escrow Agreement</h3><p class="no" id="dn">Loading…</p><div class="pt"><div><span>Client</span>—</div><div><span>Freelancer</span>—</div></div><div id="ml"></div><p id="dd" style="margin:20px 0 0;font-family:var(--serif);font-size:20px;color:var(--acc)"></p></div>
+<div class="cr rv"><div style="grid-column:1/-1"><label>Freelancer (0x…)</label><input id="fr" placeholder="0x…" style="font-family:monospace"></div><div><label>Milestone 1</label><input id="n1" value="0.01"></div><div><label>Milestone 2</label><input id="n2" value="0.01"></div><div><label>Milestone 3</label><input id="n3" value="0.01"></div><button class="go" id="cd">New deal →</button></div></div></main>
+<section class="why"><div class="rv"><h4>Funds locked in code</h4><p>The client moves the full amount into the contract, and neither side can withdraw outside the milestone rules.</p></div><div class="rv"><h4>Granular release</h4><p>Each milestone is its own amount, so shipping phase 1 releases phase 1 only.</p></div><div class="rv"><h4>Escalation path</h4><p>Either party can open a dispute and the arbiter decides the split in the same transaction.</p></div></section>
 <footer><div class="wrap">
-<p style="margin-bottom:2px">SureEscrow — milestone escrow on BOT Chain. Live on mainnet; real assets with real value.</p>
+<p style="margin-bottom:2px">SureEscrow — milestone escrow on BOT Chain. Live on mainnet; real funds with real recourse.</p>
 <div class="proof">
 <div class="proof-title">Proof on BOT Mainnet</div>
 <div class="proof-grid">
@@ -128,11 +54,228 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--muted);font-s
 <a href="https://scan.botchain.ai/" target="_blank" rel="noopener" class="proof-link">BOTScan Explorer &#8599;</a>
 </div>
 </div>
+<p style="margin-top:14px"><a href="index.html">Home</a> · <a href="app.html">Open the app →</a> · <a href="docs.html">Docs</a></p>
 </div></footer>
-
-<script type="importmap">
+<div class="toast" id="toast"></div><script type="importmap">
 {"imports":{"ethers":"https://esm.sh/ethers@6.13.2","@reown/appkit":"https://esm.sh/@reown/appkit@1.8.21","@reown/appkit-adapter-ethers":"https://esm.sh/@reown/appkit-adapter-ethers@1.8.21"}}
 </script>
-<script type="module" src="app.js"></script>
-</body>
-</html>
+<script type="module">
+import { ethers } from 'ethers';
+import { AppKit } from '@reown/appkit';
+import { EthersAdapter } from '@reown/appkit-adapter-ethers';
+
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => [...document.querySelectorAll(s)];
+const fmt = (n, d = 0) => Number(n).toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
+const fmtE = (n, d = 18) => Number(ethers.formatUnits(n, d)).toLocaleString(undefined, { maximumFractionDigits: 4 });
+let _t;
+function toast(m) { const t = $("#toast"); t.textContent = m; t.classList.add("on"); clearTimeout(_t); _t = setTimeout(() => t.classList.remove("on"), 2600); }
+const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .08 });
+$$(".rv").forEach((e) => io.observe(e));
+
+// theme toggle
+(function themeInit() {
+  const saved = localStorage.getItem("botchain-theme");
+  if (saved) document.documentElement.dataset.theme = saved;
+  const b = $("#themeBtn");
+  const paint = () => { if (b) b.textContent = document.documentElement.dataset.theme === "light" ? "☾" : "☀"; };
+  paint();
+  if (b) b.addEventListener("click", () => {
+    const nxt = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+    document.documentElement.dataset.theme = nxt;
+    localStorage.setItem("botchain-theme", nxt);
+    paint();
+  });
+})();
+
+const PROJECT_ID = 'f018499b1e4a94d961ab67aeeeff3254';
+const NETS = {
+  968: { id: 968, name: 'BOT Chain Testnet', nativeCurrency: { name: 'BOT', symbol: 'BOT', decimals: 18 }, rpcUrls: { default: { http: ['https://rpc.bohr.life'] } }, blockExplorers: { default: { name: 'BOTScan Testnet', url: 'https://scan.bohr.life' } }, testnet: true },
+  677: { id: 677, name: 'BOT Chain', nativeCurrency: { name: 'BOT', symbol: 'BOT', decimals: 18 }, rpcUrls: { default: { http: ['https://rpc.botchain.ai'] } }, blockExplorers: { default: { name: 'BOTScan', url: 'https://scan.botchain.ai' } } },
+};
+const CHAINS = {
+  968: { se: '0xDf9229a3242a84cAa2cdB4AEC4e1475AFf6AB080', wbot: '0xD8FBaBf44B2dbb427d881F8Ea66F14D8287A55c0', sym: 'TestWBOT' },
+  677: { se: '0xa6e6a6C84705D12b7CDc268c2fECB89612122A48', wbot: '0xD5452816194a3784dBa983426cCe7c122F4abd30', sym: 'WBOT' },
+};
+const SE_ABI = [
+  'function totalDeals() view returns (uint256)',
+  'function totalReleased() view returns (uint256)',
+  'function owner() view returns (address)',
+  'function getDeal(uint256) view returns (address,address,uint256,uint256,uint256,bool,bool,uint256[],bool[])',
+  'function createDeal(address,uint256[])',
+  'function release(uint256,uint256)',
+  'function dispute(uint256)',
+  'function resolveDispute(uint256,bool)',
+  'event DealCreated(uint256 indexed dealId, address indexed client, address indexed freelancer, uint256 total, uint256 milestoneCount)',
+  'event DisputeResolved(uint256 indexed dealId, bool paidToFreelancer, uint256 toFreelancer, uint256 toClient)',
+];
+const ERC20_ABI = [
+  'function balanceOf(address) view returns (uint256)',
+  'function approve(address,uint256) returns (bool)',
+  'function allowance(address,address) view returns (uint256)',
+];
+const GAS = { gasPrice: ethers.parseUnits('20', 'gwei') };
+
+let currentChainId = 677;
+let account = null;
+let appkit = null;
+let dealId = 0n;
+let deal = null;
+let arbiter = null;
+
+function rpc() { return new ethers.JsonRpcProvider(currentChainId === 677 ? 'https://rpc.botchain.ai' : 'https://rpc.bohr.life'); }
+const short = (a) => (a ? a.slice(0, 6) + '…' + a.slice(-4) : '—');
+
+function initAppKit() {
+  const adapter = new EthersAdapter();
+  appkit = new AppKit({
+    networks: [NETS[968], NETS[677]], adapters: [adapter], projectId: PROJECT_ID, themeMode: 'dark',
+    metadata: { name: 'SureEscrow', description: 'Milestone escrow on BOT Chain', url: location.origin, icons: [] },
+  });
+  appkit.subscribeAccount((s) => {
+    account = s.address || null;
+    const b = $("#connectBtn");
+    if (b) b.textContent = account ? short(account) : 'Connect wallet';
+    refresh();
+  });
+  const cb = $("#connectBtn");
+  if (cb) cb.addEventListener("click", () => appkit.open());
+  const ns = $("#netSel");
+  if (ns) ns.addEventListener("change", (e) => { currentChainId = Number(e.target.value); refresh(); });
+}
+
+async function refresh() {
+  try {
+    const c = CHAINS[currentChainId];
+    const p = rpc();
+    const se = new ethers.Contract(c.se, SE_ABI, p);
+    const total = await se.totalDeals().catch(() => 0n);
+    if (total === 0n) {
+      deal = null;
+      const dn = $("#dn");
+      if (dn) dn.textContent = "No deals yet · Mainnet " + currentChainId;
+      const ml = $("#ml");
+      if (ml) ml.innerHTML = '<p style="color:var(--mut)">No escrow deals on this chain yet — create the first one below.</p>';
+      setSums(0n, 0n, 0n, 0n);
+      return;
+    }
+    dealId = total - 1n;
+    const d = await se.getDeal(dealId);
+    deal = { id: dealId, client: d[0], freelancer: d[1], funded: d[2], released: d[3], count: Number(d[4]), active: d[5], disputed: d[6], amts: [...d[7]], rel: [...d[8]] };
+    arbiter = await se.owner().catch(() => null);
+    // arbiter-settled total from events
+    let settled = 0n;
+    try {
+      const topic = ethers.id('DisputeResolved(uint256,bool,uint256,uint256)');
+      const logs = await p.getLogs({ address: c.se, topics: [topic], fromBlock: 0, toBlock: 'latest' });
+      const iface = new ethers.Interface(SE_ABI);
+      for (const l of logs) {
+        try { const e = iface.parseLog(l); settled += BigInt(e.args[2]) + BigInt(e.args[3]); } catch { /* skip */ }
+      }
+    } catch { /* optional */ }
+    const totRel = await se.totalReleased().catch(() => deal.released);
+    setSums(deal.funded, totRel, deal.funded - deal.released, settled);
+    renderDoc();
+  } catch (e) { console.error(e); }
+}
+
+function setSums(t, r, lk, arb) {
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = fmt(Number(ethers.formatEther(v)), 4); };
+  set("a1", t); set("a2", r); set("a3", lk < 0n ? 0n : lk); set("a4", arb);
+}
+
+function renderDoc() {
+  const c = CHAINS[currentChainId];
+  const dn = $("#dn");
+  if (dn) dn.textContent = "No. " + String(Number(deal.id)).padStart(4, "0") + " · " + (currentChainId === 677 ? "Mainnet 677" : "Testnet 968");
+  const ml = $("#ml");
+  if (!ml || !deal) return;
+  const isClient = account && account.toLowerCase() === deal.client.toLowerCase();
+  const isArbiter = account && arbiter && account.toLowerCase() === arbiter.toLowerCase();
+  ml.innerHTML = deal.amts.map((amt, i) => {
+    const released = deal.rel[i];
+    const cls = released ? "rel" : (deal.disputed ? "dsp" : "");
+    const dot = released ? "✓" : (deal.disputed ? "⚖" : (i + 1));
+    const sub = released ? "Released to freelancer" : (deal.disputed ? "Under dispute — arbiter decides" : "Locked in contract");
+    const canAct = deal.active && !deal.disputed && isClient && !released;
+    const slider = (!released && deal.disputed && isArbiter)
+      ? `<div class="dp on"><label>Arbiter pays the freelancer <b id="pc${i}">50</b>%</label><input type="range" min="0" max="100" value="50" data-s="${i}"><div class="ac"><button class="r" data-a="${i}">Arbiter rules</button></div></div>`
+      : (!released && deal.disputed ? `<div class="dp on">Under dispute — awaiting the arbiter.</div>` : "");
+    const btns = canAct
+      ? `<div class="ac"><button class="r" data-r="${i}">Release</button><button data-d="${i}">Dispute</button></div>`
+      : (!released && deal.active && !deal.disputed ? `<div class="ac"><button data-d="${i}">Dispute</button></div>` : "");
+    return `<div class="ms ${cls}"><div class="dot">${dot}</div><div><h4>Milestone ${i + 1}</h4><small>${sub}</small>${btns}${slider}</div><div class="am">${fmt(Number(ethers.formatEther(amt)), 4)}</div></div>`;
+  }).join("");
+  const dd = $("#dd");
+  if (dd) dd.textContent = !deal.active ? "Deal complete. All funds have been settled." : (deal.disputed ? "Deal disputed — awaiting arbiter ruling." : "");
+  const pt = document.querySelector(".pt");
+  if (pt) pt.innerHTML = `<div><span>Client</span>${short(deal.client)}</div><div><span>Freelancer</span>${short(deal.freelancer)}</div>`;
+}
+
+if ($("#ml")) $("#ml").addEventListener("click", async (e) => {
+  const b = e.target.closest("button");
+  if (!b || !deal) return;
+  if (!account) { appkit.open(); return; }
+  const D = b.dataset;
+  try {
+    const c = CHAINS[currentChainId];
+    const s = await appkit.getSigner();
+    const se = new ethers.Contract(c.se, SE_ABI, s);
+    if (D.r != null) {
+      toast("Releasing milestone…");
+      await (await se.release(deal.id, D.r, GAS)).wait();
+      toast("Milestone released.");
+    } else if (D.d != null) {
+      toast("Opening dispute…");
+      await (await se.dispute(deal.id, GAS)).wait();
+      toast("Dispute opened.");
+    } else if (D.a != null) {
+      const i = +D.a;
+      const pctEl = document.getElementById("pc" + i);
+      const pct = pctEl ? +pctEl.textContent : 50;
+      const payFreelancer = pct >= 50;
+      toast("Arbiter ruling…");
+      await (await se.resolveDispute(deal.id, payFreelancer, GAS)).wait();
+      toast("Arbiter settled the milestone.");
+    }
+    refresh();
+  } catch (err) { toast(String(err.shortMessage || err.reason || err.message || "failed").slice(0, 90)); }
+});
+if ($("#ml")) $("#ml").addEventListener("input", (e) => {
+  if (e.target.dataset.s != null) {
+    const el = document.getElementById("pc" + e.target.dataset.s);
+    if (el) el.textContent = e.target.value;
+  }
+});
+
+const cd = $("#cd");
+if (cd) cd.addEventListener("click", async () => {
+  const amts = [$("#n1").value, $("#n2").value, $("#n3").value].map((v) => Number(v));
+  if (amts.some((v) => !(v > 0))) return toast("Enter an amount for each milestone");
+  const free = ($("#fr") ? $("#fr").value : "").trim();
+  if (!free || !/^0x[0-9a-fA-F]{40}$/.test(free)) return toast("Enter the freelancer 0x address above");
+  if (!account) { appkit.open(); return; }
+  try {
+    const c = CHAINS[currentChainId];
+    const s = await appkit.getSigner();
+    const me = await s.getAddress();
+    const bigs = amts.map((v) => ethers.parseEther(String(v)));
+    const total = bigs.reduce((x, y) => x + y, 0n);
+    const t = new ethers.Contract(c.wbot, ERC20_ABI, s);
+    if ((await t.balanceOf(me)) < total) return toast("Insufficient " + c.sym);
+    if ((await t.allowance(me, c.se)) < total) {
+      toast("Approving…");
+      await (await t.approve(c.se, ethers.MaxUint256, GAS)).wait();
+    }
+    const se = new ethers.Contract(c.se, SE_ABI, s);
+    toast("Creating deal…");
+    await (await se.createDeal(free.trim(), bigs, GAS)).wait();
+    toast("Deal created. " + total + " escrowed.");
+    refresh();
+  } catch (err) { toast(String(err.shortMessage || err.reason || err.message || "failed").slice(0, 90)); }
+});
+
+initAppKit();
+refresh();
+
+</script></body></html>
