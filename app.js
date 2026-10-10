@@ -53,6 +53,21 @@ const $ = (id) => document.getElementById(id);
 const fmt = (n, d = 18) => Number(ethers.formatUnits(n, d)).toLocaleString(undefined, { maximumFractionDigits: 4 });
 const short = (a) => a.slice(0, 6) + '…' + a.slice(-4);
 
+function getProvider() {
+  try {
+    if (typeof appkit !== 'undefined' && appkit && typeof appkit.getWalletProvider === 'function') {
+      const p = appkit.getWalletProvider('eip155') || appkit.getWalletProvider();
+      if (p) return p;
+    }
+  } catch (e) {}
+  return null;
+}
+async function getSigner() {
+  const wp = getProvider();
+  if (!wp) { try { appkit.open(); } catch (e) {} return null; }
+  return new ethers.BrowserProvider(wp).getSigner();
+}
+
 let appkit = null;
 let readProvider;
 let currentChainId = 677;
@@ -153,7 +168,7 @@ async function refresh() {
 async function signerOrAlert() {
   if (!account) { appkit?.open(); return null; }
   if (!CONTRACTS[currentChainId]) { alert('No contracts on this network in this app. Switch to BOT Chain 677 or Testnet 968.'); return null; }
-  const s = await appkit?.getSigner();
+  const s = await getSigner();
   if (!s) { appkit?.open(); return null; }
   return s;
 }
