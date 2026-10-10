@@ -34,6 +34,7 @@ const SE_ABI = [
 const ERC20_ABI = [
   'function balanceOf(address) view returns (uint256)',
   'function approve(address,uint256) returns (bool)',
+  'function deposit() payable',
   'function allowance(address,address) view returns (uint256)',
 ];
 
@@ -157,6 +158,27 @@ async function signerOrAlert() {
   return s;
 }
 
+async function ensureWbot(amount, msgId) {
+  const s = await signerOrAlert();
+  if (!s) return false;
+  const c = CONTRACTS[currentChainId];
+  const w = new ethers.Contract(c.twbot, ERC20_ABI, s);
+  const owner = await s.getAddress();
+  const bal = await w.balanceOf(owner);
+  if (bal >= amount) return true;
+  const shortfall = amount - bal;
+  const native = await s.provider.getBalance(owner);
+  const gasCost = ethers.parseUnits('0.005', 18);
+  if (native < shortfall + gasCost) {
+    showMsg(msgId, 'Need ' + fmt(shortfall + gasCost - native) + ' more BOT — fund the wallet first (wrap + gas).');
+    return false;
+  }
+  showMsg(msgId, 'Wrapping BOT → WBOT…');
+  const tx = await w.deposit({ value: shortfall });
+  await tx.wait();
+  return true;
+}
+
 async function doCreate() {
   const s = await signerOrAlert();
   if (!s) return;
@@ -164,6 +186,8 @@ async function doCreate() {
   const free = ($('dFree')?.value || '').trim();
   if (!/^0x[a-fA-F0-9]{40}$/.test(free)) return showMsg('dMsg', 'Enter a valid freelancer address');
   const freelancer = ethers.getAddress(free);
+  const me0 = await s.getAddress();
+  if (freelancer.toLowerCase() === me0.toLowerCase()) return showMsg('dMsg', "Freelancer can't be your own address — enter the other party.");
   const amts = ($('dAmts')?.value || '').split(',').map((x) => x.trim()).filter(Boolean);
   if (!amts.length) return showMsg('dMsg', 'Enter milestone amounts');
   let bigs;
@@ -172,6 +196,7 @@ async function doCreate() {
   const total = bigs.reduce((x, y) => x + y, 0n);
   const token = new ethers.Contract(c.twbot, ERC20_ABI, s);
   const owner = await s.getAddress();
+  if (!(await ensureWbot(total, 'dMsg'))) return;
   showMsg('dMsg', 'Approving ' + fmt(total) + ' WBOT…');
   try {
     const allow = await token.allowance(owner, c.se);
